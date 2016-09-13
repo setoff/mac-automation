@@ -8,6 +8,7 @@
   Launch Automator and tap File -> New (this dialog appears on launch)
     - select docuement type "Service"
     - add "Run JavaScript" action
+    - select "Service recievies" "no input" (in pane over script) 
     - paste this script
     - save
     This service should appear in any application Services menu. If didn't appear
