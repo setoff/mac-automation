@@ -10,7 +10,8 @@
     - add "Run JavaScript" action
     - paste this script
     - save
-    This service should appear in any application Services menu.
+    This service should appear in any application Services menu. If didn't appear
+			just copy this Automator workflow file to ~/Library/Services folder.
     - Tap it to launch
   Optional: add shortcut to service.
     - launch System preferencies -> Keyboard -> Shortcuts
@@ -23,14 +24,15 @@ function run(input, parameters) {
 	Safari = Application('Safari')
 	for (var wndx in Safari.windows) {
 		var window = Safari.windows[wndx]
-		if (window.name() == 'Extensions' || window.name().length == 0 ) continue;
+		if (window.name() == 'Extensions' || window.name().length == 0) continue;
 		sounds = window.tabs().filter(function(item) {
+			if (item.url() == undefined) { return false }
 			return item.url().indexOf('soundcloud.com') != -1
 		})
 		if (sounds.length == 1) {
 			Safari.doJavaScript(
-        'document.getElementsByClassName("playControl")[0].click()',
-        { in: sounds[0] })
+				'document.getElementsByClassName("playControl")[0].click()',
+				{ in: sounds[0] })
 			break
 		}
 	}
